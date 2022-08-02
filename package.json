@@ -1,0 +1,11 @@
+{
+  "name": "30daysofweb3-rsvp",
+  "version": "1.0.0",
+  "description": "A full-stack RSVP dapp built during 30 Days of Web3 curriculum.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["web3", "30daysofweb3", "dapp"],
+  "author": "Naomi Hauret",
+  "license": "MIT"
+}
