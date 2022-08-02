@@ -1,31 +1,24 @@
 {
   "name": "30daysofweb3-rsvp",
-  "keywords": ["web3", "30daysofweb3", "dapp"],
+  "keywords": [
+    "web3",
+    "30daysofweb3",
+    "dapp"
+  ],
   "author": "Naomi Hauret",
   "license": "MIT",
   "version": "1.0.0",
   "description": "A full-stack RSVP dapp built during 30 Days of Web3 curriculum.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "contracts:prettier": "pnpm --filter smartcontracts prettier",
+    "contracts:test": "pnpm --filter smartcontracts test"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
+    "@nomicfoundation/hardhat-toolbox": "^1.0.2",
     "commitizen": "^4.2.5",
-    "cz-conventional-changelog": "^3.3.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3" 
-  },
-  "dependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,css,json,md}": [
-      "npx prettier --write"
-    ]
+    "cz-conventional-changelog": "^3.3.0"
   },
   "config": {
     "commitizen": {
