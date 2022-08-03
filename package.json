@@ -10,8 +10,9 @@
   "version": "1.0.0",
   "description": "A full-stack RSVP dapp built during 30 Days of Web3 curriculum.",
   "scripts": {
-    "contracts:prettier": "pnpm --filter smartcontracts prettier",
-    "contracts:test": "pnpm --filter smartcontracts test"
+    "contracts:prettier": "pnpm --filter smartcontracts run prettier",
+    "contracts:test": "pnpm --filter smartcontracts run test",
+    "contracts:deploy": "pnpm --filter smartcontracts run compile && pnpm --filter smartcontracts run deploy"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

@@ -11,17 +11,24 @@
 3vent is a monorepo. You will find the following packages :
 
 `packages/smartcontracts`: Hardhat + Solidity smartcontract
+`packages/subgraphs`: Subgraphs
 `packages/frontend`: Front-end application. 
 
 Each of the packages have their own package.json file, so they define their dependencies.
 
+```
 |- package.json => root workspace
 |--- packages
+|
 |------ frontend
 |---------- package.json  => front-end app
+|
 |------ smartcontracts
 |---------- package.json => Hardhat + Solidity project
-
+|
+|------ subgraphs
+|---------- package.json  => Subgraphs
+```
 ### How to install
 > Pre-requisite: use LTS node version, have pnpm installed.
 
