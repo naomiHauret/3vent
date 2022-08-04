@@ -33,4 +33,7 @@ Each of the packages have their own package.json file, so they define their depe
 > Pre-requisite: use LTS node version, have pnpm installed.
 
 - Clone this repository locally
-- Install the dependencies with `pnpm install`
+- At the root of the project, install the dependencies with `pnpm install`
+
+#### Run the front-end
+- In the terminal, run `pnpm dapp:dev`. Hit `localhost:5173` and you should see the app.
