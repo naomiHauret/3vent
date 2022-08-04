@@ -1,0 +1,15 @@
+.layer-flyout {
+  @apply bg-base-100 overflow-hidden border-neutral border;
+}
+
+.button-link {
+  @apply rounded-md py-1;
+}
+
+.link {
+  @apply px-2 hover:bg-base-200 hover:bg-opacity-50;
+}
+
+.submenu-link {
+  @apply block w-full text-2xs py-2 focus:bg-base-200;
+}

@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    --brand: ;
+    scrollbar-color: var(--brand) Canvas;
+    color-scheme: dark;
+    accent-color: var(--brand);
+  }
+
+  main {
+    @apply pb-20 animate-appear;
+  }
+  :focus-visible {
+    outline-color: var(--brand);
+  }
+  ::selection {
+    background-color: var(--brand);
+  }
+  ::marker {
+    color: var(--brand);
+  }
+
+  ::-moz-color-swatch,
+  ::-webkit-color-swatch {
+    @apply border-0 overflow-hidden;
+  }
+
+  input[type='color'] {
+    @apply w-10 h-10 p-1 overflow-hidden;
+  }
+
+  :is(::-webkit-calendar-picker-indicator, ::-webkit-clear-button, ::-webkit-inner-spin-button, ::-webkit-outer-spin-button) {
+    color: var(--brand);
+  }
+  html {
+    @apply bg-base-100 text-base-content overflow-x-hidden;
+  }
+
+  body {
+    @apply font-sans min-h-screen flex flex-col;
+  }
+
+  [type='radio'],
+  [type='checkbox'] {
+    @apply cursor-pointer disabled:cursor-not-allowed;
+  }
+
+  #root {
+    @apply flex flex-grow flex-col;
+  }
+
+  .link {
+    @apply underline hover:no-underline focus:no-underline;
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-full max-w-screen-lg px-3;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+.toast-group [data-part='root'] {
+  animation-name: fadeIn;
+  animation-fill-mode: forwards;
+  animation-duration: 0.2s;
+}
+
+.toast-group [data-part='root']:not([data-open]) {
+  animation-duration: var(--remove-delay);
+  animation-name: fadeOut;
+}
