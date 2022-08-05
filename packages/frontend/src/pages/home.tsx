@@ -1,5 +1,8 @@
 import Button from '@components/Button'
+import button from '@components/Button/button'
+import { ROUTE_EVENT_NEW } from '@config/routes'
 import useAccount from '@hooks/useAccount'
+import { Link } from 'solid-app-router'
 import { Show } from 'solid-js'
 import { Title } from 'solid-meta'
 
@@ -15,13 +18,14 @@ export default function Page() {
           <p class="text-lg">Find, join, and create virtual events with your web3 frens!</p>
 
           <div class="mt-6 flex flex-col space-y-3 xs:flex-row xs:space-y-0 xs:space-i-2">
-            <Show when={!accountData()?.address}>
-              <Button>Connect web3 wallet</Button>
-            </Show>
-
-            <Button scale="sm" intent="neutral-revert">
+            <Link href={ROUTE_EVENT_NEW} class={
+              button({
+                scale: "sm",
+                intent: "neutral-revert"
+              })
+            }>
               Create event
-            </Button>
+            </Link>
           </div>
         </div>
       </main>
