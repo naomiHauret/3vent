@@ -1,5 +1,6 @@
 import Button from '@components/Button'
 import ButtonGroupWalletOptions from '@components/ButtonGroupWalletOptions'
+import ButtonSwitchNetwork from '@components/ButtonSwitchNetwork'
 import {
   ROUTE_EVENT_NEW,
   ROUTE_MY_PAST_EVENTS,
@@ -9,6 +10,7 @@ import {
 } from '@config/routes'
 import { shortenEthereumAddress } from '@helpers/shortenEthereumAddress'
 import useAccount from '@hooks/useAccount'
+import useNetwork from '@hooks/useNetwork'
 import { disconnect } from '@wagmi/core'
 import * as popover from '@zag-js/popover'
 import { normalizeProps, useMachine } from '@zag-js/solid'
@@ -18,6 +20,7 @@ import styles from './styles.module.css'
 
 export const PopoverMenu = () => {
   const { accountData } = useAccount()
+  const { networkData } = useNetwork()
   const [state, send] = useMachine(popover.machine({ id: createUniqueId() }))
   const api = createMemo(() => popover.connect(state, send, normalizeProps))
 
@@ -51,24 +54,33 @@ export const PopoverMenu = () => {
                 <span class="px-1ex font-mono font-bold">{shortenEthereumAddress(accountData()?.address)}</span>
               </span>
             </div>
-
-            <nav class="text-2xs border border-t-neutral xs:hidden -mx-2 flex-col flex divide-y divide-neutral">
-              <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_EVENT_NEW}>
-                Create event
-              </Link>
-              <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_UPCOMING_EVENTS}>
-                My upcoming events
-              </Link>
-              <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_PAST_EVENTS}>
-                My past events
-              </Link>
-              <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_UPCOMING_RSVPS}>
-                My upcoming RSVPs
-              </Link>
-              <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_PAST_RSVPS}>
-                My past RSVPs
-              </Link>
-            </nav>
+            <Show when={networkData()?.chain?.unsupported === true}>
+              <div class="animate-appear mb-4 text-2xs">
+                <p class="mb-2">
+                  Please use <span class="font-bold">Polygon Mumbai network</span> to create a new event.
+                </p>
+                <ButtonSwitchNetwork scale="xs" />
+              </div>
+            </Show>
+            <Show when={networkData()?.chain?.unsupported === false}>
+              <nav class="text-2xs border border-t-neutral xs:hidden -mx-2 flex-col flex divide-y divide-neutral">
+                <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_EVENT_NEW}>
+                  Create event
+                </Link>
+                <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_UPCOMING_EVENTS}>
+                  My upcoming events
+                </Link>
+                <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_PAST_EVENTS}>
+                  My past events
+                </Link>
+                <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_UPCOMING_RSVPS}>
+                  My upcoming RSVPs
+                </Link>
+                <Link class="focus:bg-base-200 hover:bg-base-200 font-semibold p-2" href={ROUTE_MY_PAST_RSVPS}>
+                  My past RSVPs
+                </Link>
+              </nav>
+            </Show>
             <div class="-mx-2 -mb-2 border-t text-2xs border-neutral">
               <button
                 class="italic focus:bg-base-200 hover:bg-base-200 block w-full text-start p-2"

@@ -1,6 +1,5 @@
 import { Show } from 'solid-js'
 import { Link, useIsRouting } from 'solid-app-router'
-import { useAccount } from '@hooks/useAccount'
 import PopoverMenu from './PopoverMenu'
 import DesktopNavigation from './DesktopNavigation'
 

@@ -6,7 +6,7 @@ const FormField = (props) => {
     <div
       class={`flex flex-col border-solid rounded-md overflow-hidden border max-w-[inherit] ${props.class ?? ''}`}
       classList={{
-        'border-neutral-100 border-opacity-[0.15] focus-within:border-opacity-25':
+        'border-base-300 border-opacity-75 focus-within:border-opacity-90':
           props.hasError === false || !props?.hasError,
         'border-negative-600': props.hasError === true,
       }}
@@ -24,7 +24,7 @@ const Label = (props) => {
   return (
     <label class="flex items-center text-ex font-bold" for={props.form}>
       <Show when={props?.hasError === true}>
-        <IconErrorCircleOutline class="text-negative-10 mie-1ex" />
+        <IconErrorCircleOutline class="text-negative-200 text-lg mie-1.5" />
       </Show>
       {props.children}
     </label>
@@ -33,7 +33,7 @@ const Label = (props) => {
 
 const Description = (props) => {
   return (
-    <p class="text-neutral-400 text-xs mt-1 mb-3" id={props.id}>
+    <p class="text-xs mt-1 mb-3" id={props.id}>
       {props.children}
     </p>
   )
@@ -41,20 +41,8 @@ const Description = (props) => {
 
 const HelpBlock = (props) => {
   return (
-    <div
-      class="mt-auto px-4 py-3 border-t border-solid text-2xs border-opacity-10"
-      classList={{
-        'border-neutral-400 bg-white bg-opacity-10': props.hasError === false || !props?.hasError,
-        'border-negative-300 bg-negative-800 bg-opacity-20': props.hasError === true,
-      }}
-    >
-      <p
-        classList={{
-          'text-white text-opacity-50': props.hasError === false || !props?.hasError,
-          'text-negative-400': props.hasError === true,
-        }}
-        id={props.id}
-      >
+    <div class="mt-auto px-4 py-3 border-t border-solid border-base-300 bg-base-200 bg-opacity-30 text-2xs border-opacity-50">
+      <p class="text-base-400" id={props.id}>
         {props.children}
       </p>
     </div>

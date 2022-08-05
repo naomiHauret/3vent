@@ -8,6 +8,7 @@ export const ButtonGroupWalletOptions = () => {
   const { connect, connectors, switchToSupportedNetwork } = useConnect()
   const { networkData } = useNetwork()
   const { accountData } = useAccount()
+
   return (
     <>
       <Show when={networkData()?.chain?.unsupported === true}>

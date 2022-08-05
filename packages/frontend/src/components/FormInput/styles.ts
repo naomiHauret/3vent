@@ -5,8 +5,7 @@ export const input = cva(
   [
     'focus:outline-none',
     'appearance-none',
-    'border-solid border-opacity-20 hover:border-opacity-25 focus:border-opacity-40',
-    'bg-opacity-3.5 focus:bg-opacity-5',
+    'border-solid',
     'placeholder:text-opacity-30',
     'disabled:pointer-events-none',
   ],
@@ -15,7 +14,7 @@ export const input = cva(
       intent: {
         default: [
           //@ts-ignore
-          'placeholder:text-white bg-white text-white border-white',
+          'placeholder:text-neutral bg-transparent text-base-content border-base-300 focus:bg-base-200 hover:bg-base-200 hover:bg-opacity-10 focus:bg-opacity-25',
         ],
         error: [
           //@ts-ignore

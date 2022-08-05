@@ -12,11 +12,13 @@ import {
 } from '@config/routes'
 
 const PageError404 = lazy(() => import('./errors/404'))
+const PageCreateEvent = lazy(() => import('./pages/event/new'))
+
 export const Router = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-
+      <Route path={ROUTE_EVENT_NEW} element={<PageCreateEvent />} />
       <Route path="**" element={<PageError404 />} />
     </Routes>
   )

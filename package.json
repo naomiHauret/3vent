@@ -13,7 +13,8 @@
     "contracts:prettier": "pnpm --filter smartcontracts run prettier",
     "contracts:test": "pnpm --filter smartcontracts run test",
     "contracts:deploy": "pnpm --filter smartcontracts run compile && pnpm --filter smartcontracts run deploy",
-    "dapp:dev": "pnpm --filter frontend run dev"
+    "dapp:dev": "pnpm --filter frontend run dev",
+    "dapp:prettier": "pnpm --filter frontend run prettier"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.0.3",

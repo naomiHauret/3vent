@@ -38,7 +38,9 @@
     "solid-use": "^0.5.0",
     "solid-zustand": "^1.4.2",
     "urql": "^2.2.3",
+    "uuid": "^8.3.2",
     "wagmi": "^0.6.0",
+    "web3.storage": "^4.3.0",
     "zod": "^3.17.10",
     "zustand": "^4.0.0"
   }

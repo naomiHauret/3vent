@@ -83,6 +83,7 @@ module.exports = {
           100: '#e4d8b4', //  Base color of page, used for blank backgrounds
           200: '#d2c59d', //  Base color of elements like sidebars
           300: '#c6b386', // Base color of elements like modals, popovers etc.
+          400: '#6d5340',
         },
         'base-content': '#282824', // Foreground content color to use on base color
 
