@@ -1,4 +1,4 @@
-import { string, object, number, instanceof as zodValidationInstanceOf, date } from 'zod'
+import { string, object, number, instanceof as zodValidationInstanceOf } from 'zod'
 import { validator } from '@felte/validator-zod'
 import { createForm } from '@felte/solid'
 import * as dialog from '@zag-js/dialog'
@@ -6,10 +6,9 @@ import { normalizeProps, useMachine } from '@zag-js/solid'
 import { createEffect, createMemo, createUniqueId } from 'solid-js'
 import useToast from '@hooks/useToast'
 import { prepareWriteContract, waitForTransaction, writeContract } from '@wagmi/core'
-import { v4 as uuidv4 } from 'uuid'
 import { createSignal } from 'solid-js'
 import { createAsyncStore } from '@hooks/useAsync'
-import { utils } from 'ethers'
+import { defaultAbiCoder, parseEther } from "ethers/lib/utils";
 import abiWeb3RSVP from '@abis/web3rsvp'
 import { CONTRACT_3VENT_RSVP } from '@config/contracts'
 import { makeStorageClient } from '@config/web3storage'
@@ -18,8 +17,8 @@ import { isPast } from 'date-fns'
 const schema = object({
   name: string().trim(),
   timestamp: string().refine((value) => !isPast(new Date(value))),
-  deposit: number().positive(),
-  maxCapacity: number().positive(),
+  deposit: number().nonnegative(),
+  maxCapacity: number().int().positive(),
   image: zodValidationInstanceOf(File),
   description: string().trim(),
   link: string().url(),
@@ -119,9 +118,8 @@ export function useCreateEvent() {
     apiDialogModalTrackProgress().open()
 
     try {
-      const uuid = uuidv4()
       const imageCid = !eventImageCID() ? await uploadEventImage(values.image) : eventImageCID()
-      const deposit = utils.parseEther(`${values.deposit}`)
+      const deposit = parseEther(`${values.deposit}`)
       const eventDateAndTime = new Date(`${values.timestamp}`)
       const eventTimestamp = eventDateAndTime.getTime()
 
@@ -131,7 +129,7 @@ export function useCreateEvent() {
         link: values.link,
         image: imageCid,
       }
-      const eventDataJSON = new File([JSON.stringify(eventData)], `3vent-web3rsvp-${uuid}.json`, {
+      const eventDataJSON = new File([JSON.stringify(eventData)], 'data.json', {
         type: 'application/json',
       })
       const dataCID = !eventDataCID() ? await uploadEventData(eventDataJSON) : eventDataCID()
@@ -148,10 +146,16 @@ export function useCreateEvent() {
       const receipt = await waitForTransaction({
         hash: txn.hash,
       })
+      const data = receipt.logs[0]?.data
+
+      const [eventId] = defaultAbiCoder.decode(
+        ['bytes32'], data
+      )
+
       stateIndexEvent.setIsLoading(false)
       stateIndexEvent.setIsSuccess(true)
       stateIndexEvent.setError(null, false)
-      setTxReceipt(receipt)
+      setTxReceipt({...receipt, createdEventId: eventId})
       setEventDataCID()
       setEventImageCID()
     } catch (e) {

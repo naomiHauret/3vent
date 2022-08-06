@@ -8,7 +8,7 @@ const FormField = (props) => {
       classList={{
         'border-base-300 border-opacity-75 focus-within:border-opacity-90':
           props.hasError === false || !props?.hasError,
-        'border-negative-600': props.hasError === true,
+        'border-negative-300': props.hasError === true,
       }}
     >
       {props.children}

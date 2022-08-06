@@ -55,6 +55,10 @@
   .link {
     @apply underline hover:no-underline focus:no-underline;
   }
+
+  .input--invalid:not(:placeholder-shown) {
+    @apply bg-negative-100 border-negative-200 !important;
+  }
 }
 
 @layer components {

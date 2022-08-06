@@ -20,6 +20,10 @@ export const FormCreateEvent = () => {
     txReceipt,
   } = useCreateEvent()
   const { form } = storeForm
+  
+  createEffect(() => {
+    console.log(storeForm.errors().maxCapacity)
+  })
 
   return (
     <>
@@ -31,12 +35,14 @@ export const FormCreateEvent = () => {
           }}
           class="space-y-6 mb-8"
         >
-          <FormField>
+          <FormField hasError={storeForm.errors().name !== null}>
             <FormField.InputField>
-              <FormField.Label for="name">Your event name</FormField.Label>
+              <FormField.Label hasError={storeForm.errors().name !== null} for="name">Your event name</FormField.Label>
               <FormField.Description id="input-name-description">The name of your event</FormField.Description>
               <FormInput
                 required
+                aria-invalid={storeForm.errors().name !== null ? "true" : "false"}
+                hasError={storeForm.errors().name !== null}
                 class="w-full"
                 type="text"
                 name="name"
@@ -46,11 +52,11 @@ export const FormCreateEvent = () => {
             </FormField.InputField>
             <FormField.HelpBlock id="input-name-helpblock">An event name is required.</FormField.HelpBlock>
           </FormField>
-          <FormField>
+          <FormField hasError={storeForm.errors().image !== null}>
             <FormField.InputField>
               <div class="flex flex-col lg:justify-between lg:flex-row lg:space-x-6">
                 <div>
-                  <FormField.Label for="image">Your event image</FormField.Label>
+                  <FormField.Label hasError={storeForm.errors().image !== null} for="image">Your event image</FormField.Label>
                   <FormField.Description id="input-image-description">
                     Click on the picture to upload an image from your files.
                   </FormField.Description>
@@ -88,13 +94,14 @@ export const FormCreateEvent = () => {
             <FormField.HelpBlock id="input-image-helpblock">An image with a 1:1 ratio.</FormField.HelpBlock>
           </FormField>
 
-          <FormField>
+          <FormField hasError={storeForm.errors().description !== null}>
             <FormField.InputField>
-              <FormField.Label for="description">Description</FormField.Label>
+              <FormField.Label hasError={storeForm.errors().description !== null} for="description">Description</FormField.Label>
               <FormField.Description id="input-description-description">
                 What your event is about.
               </FormField.Description>
               <FormTextarea
+                hasError={storeForm.errors().description !== null}
                 class="w-full "
                 name="description"
                 id="description"
@@ -106,9 +113,9 @@ export const FormCreateEvent = () => {
             <FormField.HelpBlock id="input-description-helpblock">A description is required.</FormField.HelpBlock>
           </FormField>
 
-          <FormField>
+          <FormField hasError={storeForm.errors().timestamp !== null}>
             <FormField.InputField>
-              <FormField.Label for="timestamp">Date and time</FormField.Label>
+              <FormField.Label hasError={storeForm.errors().timestamp !== null} for="timestamp">Date and time</FormField.Label>
               <FormField.Description id="input-timestamp-description">
                 At what time does your event start ?
               </FormField.Description>
@@ -118,6 +125,7 @@ export const FormCreateEvent = () => {
                 id="timestamp"
                 aria-describedby="input-timestamp-description input-timestamp-helpblock"
                 required
+                hasError={storeForm.errors().timestamp !== null}
                 type="datetime-local"
                 min={new Date().toISOString().substring(0, 16)}
                 pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
@@ -128,13 +136,14 @@ export const FormCreateEvent = () => {
             </FormField.HelpBlock>
           </FormField>
 
-          <FormField>
+          <FormField hasError={storeForm.errors().maxCapacity !== null}>
             <FormField.InputField>
-              <FormField.Label for="maxCapacity">Maximum capacity</FormField.Label>
+              <FormField.Label  hasError={storeForm.errors().maxCapacity !== null}for="maxCapacity">Maximum capacity</FormField.Label>
               <FormField.Description id="input-maxCapacity-description">
                 Limit the number of spots available for your event.
               </FormField.Description>
               <FormInput
+                hasError={storeForm.errors().maxCapacity !== null}
                 min="1"
                 step="1"
                 required
@@ -150,13 +159,14 @@ export const FormCreateEvent = () => {
             </FormField.HelpBlock>
           </FormField>
 
-          <FormField>
+          <FormField hasError={storeForm.errors().deposit !== null}>
             <FormField.InputField>
-              <FormField.Label for="deposit">Refundable deposit</FormField.Label>
+              <FormField.Label hasError={storeForm.errors().deposit !== null} for="deposit">Refundable deposit</FormField.Label>
               <FormField.Description id="input-deposit-description">
                 Require a refundable deposit (in MATIC) to reserve one spot at your event.
               </FormField.Description>
               <FormInput
+                hasError={storeForm.errors().deposit !== null}
                 min="0"
                 step="any"
                 required
@@ -172,11 +182,12 @@ export const FormCreateEvent = () => {
             </FormField.HelpBlock>
           </FormField>
 
-          <FormField>
+          <FormField hasError={storeForm.errors().link !== null}>
             <FormField.InputField>
-              <FormField.Label for="link">Event link</FormField.Label>
+              <FormField.Label hasError={storeForm.errors().link !== null} for="link">Event link</FormField.Label>
               <FormField.Description id="input-link-description">A link to your virtual event.</FormField.Description>
               <FormInput
+                hasError={storeForm.errors().link !== null}
                 required
                 class="w-full"
                 type="url"

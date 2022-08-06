@@ -1,7 +1,10 @@
 import { Button } from '@components/Button'
+import button from '@components/Button/button'
 import DialogTrackProgress from '@components/DialogTrackProgress'
 import { IconCircleSolidCheck, IconErrorCircleOutline, IconSpinner } from '@components/Icons'
+import { ROUTE_EVENT_VIEW } from '@config/routes'
 import useNetwork from '@hooks/useNetwork'
+import { Link } from 'solid-app-router'
 import { Match, Show, Switch } from 'solid-js'
 
 export const DialogTrackProgressDataIndexing = (props) => {
@@ -94,8 +97,10 @@ export const DialogTrackProgressDataIndexing = (props) => {
       </ol>
       <Show when={props.stateIndexEvent.isSuccess}>
         <p class="animate-appear p-3 font-semibold rounded-md border- mt-6 border border-info-200 bg-info-100 text-on-info">
-          Success ! Your event was successfully indexed on the blockchain. <br />
+          Success ! Your event was successfully indexed on the blockchain. 
           <Show when={props?.txReceipt()?.transactionHash}>
+            <>
+            <br />
             <a
               href={`${networkData().chain.blockExplorers.default.url}/tx/${props.txReceipt()?.transactionHash}`}
               class="block mt-1 font-medium underline hover:no-underline hover:opacity-90 focus:no-underline focus:outline-none"
@@ -103,14 +108,24 @@ export const DialogTrackProgressDataIndexing = (props) => {
             >
               View transaction on explorer
             </a>
+            </>
           </Show>
         </p>
       </Show>
+      <div classList={{
+         'mt-6': props.stateIndexEvent.isError || props.stateIndexEvent.isSuccess
+      }} class='flex flex-col space-y-4 xs:space-y-0 xs:flex-row xs:space-i-4'>
+      <Show when={props.stateIndexEvent.isSuccess && props?.txReceipt()?.createdEventId}>
+        <Link class={button({})} href={`${ROUTE_EVENT_VIEW.replace(':idEvent', props?.txReceipt()?.createdEventId)}`}>
+          Go to event page !
+        </Link>
+      </Show>
       <Show when={props.stateIndexEvent.isError || props.stateIndexEvent.isSuccess}>
-        <Button class="mt-6" {...props.api().closeButtonProps}>
+        <Button intent="neutral-revert" {...props.api().closeButtonProps}>
           Go back
         </Button>
       </Show>
+      </div>
     </DialogTrackProgress>
   )
 }
