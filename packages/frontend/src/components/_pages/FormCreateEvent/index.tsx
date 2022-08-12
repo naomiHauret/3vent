@@ -21,10 +21,6 @@ export const FormCreateEvent = () => {
   } = useCreateEvent()
   const { form } = storeForm
   
-  createEffect(() => {
-    console.log(storeForm.errors().maxCapacity)
-  })
-
   return (
     <>
       {/* @ts-ignore */}

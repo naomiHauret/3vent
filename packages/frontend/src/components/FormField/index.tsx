@@ -17,7 +17,7 @@ const FormField = (props) => {
 }
 
 const InputField = (props) => {
-  return <div class="pt-5 pb-3  px-4">{props.children}</div>
+  return <div class="pt-3 xs:pt-5 pb-3 px-4">{props.children}</div>
 }
 
 const Label = (props) => {

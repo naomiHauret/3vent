@@ -127,7 +127,7 @@ export function useCreateEvent() {
         name: values.name,
         description: values.description,
         link: values.link,
-        image: imageCid,
+        image: `${imageCid}/${values.image.name}`,
       }
       const eventDataJSON = new File([JSON.stringify(eventData)], 'data.json', {
         type: 'application/json',
@@ -166,7 +166,7 @@ export function useCreateEvent() {
       //@ts-ignore
       toast().create({
         type: 'error',
-        title: `Something went wrong and we couldn't create your game: ${e?.message ?? e}`,
+        title: `Something went wrong and your event couldn't be created: ${e?.message ?? e}`,
       })
       console.error(e)
     }
