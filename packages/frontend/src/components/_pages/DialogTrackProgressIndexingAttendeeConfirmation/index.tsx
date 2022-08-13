@@ -4,7 +4,7 @@ import { IconCircleSolidCheck, IconErrorCircleOutline, IconSpinner } from '@comp
 import useNetwork from '@hooks/useNetwork'
 import { Match, Show, Switch } from 'solid-js'
 
-export const DialogTrackProgressDataIndexing = (props) => {
+export const DialogTrackProgressIndexingAttendeeConfirmation = (props) => {
   const { networkData } = useNetwork()
 
   return (
@@ -34,7 +34,7 @@ export const DialogTrackProgressDataIndexing = (props) => {
             </Match>
           </Switch>
           <div>
-            Indexing your RSVP on the blockchain. <br />
+            Indexing the confirmation on the blockchain. <br />
             <Show when={!props.stateIndexEvent.isSuccess}>
               <span class="font-bold">Make sure to sign the transaction in your wallet !</span>
             </Show>
@@ -43,7 +43,7 @@ export const DialogTrackProgressDataIndexing = (props) => {
       </ol>
       <Show when={props.stateIndexEvent.isSuccess}>
         <p class="animate-appear p-3 font-semibold rounded-md border- mt-6 border border-info-200 bg-info-100 text-on-info">
-          Success ! You successfully RSVPed to this event. 
+          Success ! {props.successMessage()} 
           <Show when={props?.txReceipt()?.transactionHash}>
             <>
             <br />
@@ -78,4 +78,4 @@ export const DialogTrackProgressDataIndexing = (props) => {
   )
 }
 
-export default DialogTrackProgressDataIndexing
+export default DialogTrackProgressIndexingAttendeeConfirmation

@@ -46,7 +46,6 @@ export function handleNewEventCreated(event: NewEventCreated): void {
         if (imagePath) {
           const imageURL =
             "https://ipfs.io/ipfs/" +
-            event.params.eventDataCID +
             imagePath.toString();
           newEvent.imageURL = imageURL;
         } else {

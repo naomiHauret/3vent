@@ -1,16 +1,16 @@
-import getUpcomingRSVPs from "@graphql/rsvp/get-upcoming-rsvps"
+import getPastRSVPs from "@graphql/rsvp/get-past-rsvps"
 import useAccount from "@hooks/useAccount"
 import { createSignal, createResource, createEffect } from "solid-js"
 
-async function fetchUpcomingRSVPs(id) {
-    const result = await getUpcomingRSVPs(id)
+async function fetchPastRSVPs(id) {
+    const result = await getPastRSVPs(id)
     return result
   }
   
-export function useUpcomingRSVPs() {
+export function usePastRSVPs() {
     const { accountData } = useAccount()
     const [id, setId] = createSignal(accountData()?.address?.toLowerCase() ?? "")
-    const [upcomingRSVPs] = createResource(id, fetchUpcomingRSVPs)
+    const [pastRSVPS] = createResource(id, fetchPastRSVPs)
     
     createEffect(() => {
         if(!accountData()?.address) setId("")
@@ -18,7 +18,7 @@ export function useUpcomingRSVPs() {
             setId(accountData()?.address?.toLowerCase() ?? "")
         }
     })
-    return upcomingRSVPs
+    return pastRSVPS
 }
 
-export default useUpcomingRSVPs
+export default usePastRSVPs

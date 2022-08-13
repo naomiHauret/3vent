@@ -4,7 +4,6 @@ import { Title, Meta } from 'solid-meta'
 import useAccount from '@hooks/useAccount'
 import ButtonGroupWalletOptions from '@components/ButtonGroupWalletOptions'
 import useNetwork from '@hooks/useNetwork'
-import useToast from '@hooks/useToast'
 import ButtonSwitchNetwork from '@components/ButtonSwitchNetwork'
 export default function Page() {
   const { accountData } = useAccount()

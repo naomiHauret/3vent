@@ -10,7 +10,7 @@ dataSources:
     source:
       address: "0x283CD23669545D3edE0d4582D60219B62f6707d7"
       abi: Web3RSVP
-      startBlock: 27454275
+      startBlock: 27603042
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6

@@ -22,6 +22,7 @@
     "@felte/solid": "^1.2.2",
     "@felte/validator-zod": "^1.0.10",
     "@solid-primitives/date": "^2.0.0",
+    "@tanstack/solid-table": "^8.5.11",
     "@urql/core": "^2.6.1",
     "@wagmi/core": "^0.5.0",
     "@zag-js/dialog": "^0.1.11",

@@ -7,7 +7,7 @@ async function fetchEventData(idEvent) {
 }
 
 export function EventData({ params }) {
-  const [event] = createResource(() => params.idEvent, fetchEventData)
+  const [event] = createResource(params.idEvent, fetchEventData)
   return event
 }
 

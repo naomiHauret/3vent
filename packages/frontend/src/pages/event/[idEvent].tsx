@@ -43,6 +43,9 @@ export default function Page() {
             <p>
               It looks like the event you're looking for doesn't exist.
             </p>
+            <p class="font-bold mb-4">
+              If you just created this event, please reload this page in 30 seconds - 1 minute: <span class="underline">it might take a few seconds before it's indexed and visible.</span>
+            </p>
           </div>
         </Match>
         <Match when={event()?.data?.event}>

@@ -1,5 +1,5 @@
 import { createEffect, createSignal, Match, Show, Switch } from "solid-js";
-import { createCountdownFromNow, createTimeDifferenceFromNow, SECOND } from '@solid-primitives/date'
+import { createTimeDifferenceFromNow, SECOND } from '@solid-primitives/date'
 import Button from "@components/Button"
 import useRSVPToEvent from './useRSVPToEvent'
 import useAccount from "@hooks/useAccount";
@@ -10,7 +10,7 @@ import { formatEther } from "ethers/lib/utils";
 export const ButtonRSVPToEvent = (props) => {
     const { accountData } = useAccount()
     const [targetTimestamp] = createSignal(props.event.eventTimestamp * 1);
-    const [updateNowInterval, setUpdateNowInterval] = createSignal(SECOND)
+    const [updateNowInterval] = createSignal(SECOND)
     const [diff] = createTimeDifferenceFromNow(targetTimestamp, updateNowInterval);
     const { 
         checkIfAlreadyRSVPed,
@@ -19,10 +19,14 @@ export const ButtonRSVPToEvent = (props) => {
         apiDialogModalTrackProgress,
         rsvpToEvent, 
     } = useRSVPToEvent()
+    const [hasRSVPed, setHasRSVPed] = createSignal(
+        !accountData()?.address 
+        || checkIfAlreadyRSVPed({ account: accountData()?.address , rsvps: props.event.rsvps }) ? false : true
+    )
     const [canRSVP, setCanRSVP] = createSignal(
         (
             !accountData()?.address 
-            || diff() > 0
+            || diff() <= 0
             || checkIfAlreadyRSVPed({ account: accountData()?.address , rsvps: props.event.rsvps })
         )
         ? false : true
@@ -30,14 +34,15 @@ export const ButtonRSVPToEvent = (props) => {
 
     createEffect(() => {
         if(stateIndexEvent.isSuccess) {
-            setCanRSVP(true)
+            setHasRSVPed(true)
         }
     })
     createEffect(() => {
         if(
-            !stateIndexEvent.isSuccess ||
+            hasRSVPed() === true ||
+            stateIndexEvent.isSuccess ||
             !accountData()?.address
-            || diff() > 0
+            || diff() <= 0
             || checkIfAlreadyRSVPed({ account: accountData()?.address , rsvps: props.event.rsvps })
         ) {
             setCanRSVP(false)
