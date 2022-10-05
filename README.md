@@ -2,6 +2,12 @@
 
 3vent is a full-stack RSVP dapp built during [30 Days of Web3](https://www.30daysofweb3.xyz/) curriculum.
 
+##  30 Days of Web3 pet projects links
+* [smart contracts subrepo](https://github.com/naomiHauret/3vent/tree/main/packages/smartcontracts) 
+* [front-end subrepo](https://github.com/naomiHauret/3vent/tree/main/packages/frontend) 
+* [subgraph subrepo](https://github.com/naomiHauret/3vent/tree/main/packages/subgraphs) 
+* [Lens app repo](https://github.com/naomiHauret/lensbook)
+
 ## Overview
 > An Eventbrite like platform. Attendees will deposit ETH to RSVP and will get it back upon them checking in at the event.
 
